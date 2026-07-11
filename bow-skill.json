@@ -1,0 +1,43 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Bow-T/bow-agent/main/schema/bow-skill.schema.json",
+  "id": "flutter-supabase",
+  "label": "Flutter + Supabase",
+  "version": "1.0.0",
+  "description": "Bộ skill ĐẦY ĐỦ cho stack Flutter + Supabase của team Bow — 24 skill thật của dự án (MVVM, realtime, model, migration, security, stripe, jira, testing…). skillsDir trỏ monorepo/skills. Kèm agent-skills + prompt làm backup đồng bộ.",
+  "maintainer": "team-flutter",
+  "skillsDir": "monorepo/skills",
+  "targets": {
+    "detect": [
+      { "file": "pubspec.yaml", "contains": "flutter" },
+      { "path": "apps/mobile" },
+      { "path": "lib/src/pages" }
+    ],
+    "monorepoHint": "apps/mobile"
+  },
+  "skills": [
+    "bow-commit",
+    "bow-i18n",
+    "bow-lean",
+    "bow-lean-review",
+    "bow-log-subtask",
+    "bow-model",
+    "bow-ui",
+    "code-simplification",
+    "codemagic-build-prod",
+    "debugging-and-error-recovery",
+    "express-realtime-review",
+    "flutter-realtime",
+    "impact-sweep",
+    "jira-triage-bug-qc",
+    "planning-and-task-breakdown",
+    "security-and-hardening",
+    "spec-driven-development",
+    "stripe-best-practices",
+    "stripe-projects",
+    "supabase-migration",
+    "supabase-security-review",
+    "test-driven-development",
+    "upgrade-stripe",
+    "watch"
+  ]
+}
