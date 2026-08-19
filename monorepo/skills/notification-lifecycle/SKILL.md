@@ -1,6 +1,6 @@
 ---
 name: notification-lifecycle
-description: Catch the recurring <PROJECT_KEY> notification bug class BEFORE QC does — the whole push+in-app lifecycle for a status/event, not just one leg of it. A Sprint-7 sweep logged ~20 notification bugs that were each a different leg of the SAME five questions failing: (1) is a push EMITTED on every transition (incl. per-stop legs); (2) in the RECIPIENT's language, not the sender's/app's; (3) exactly ONCE (the app does NOT dedupe by type); (4) does tapping it route to the LIVE target and get WITHDRAWN when that target dies; (5) do the in-app list + bell badge re-sync in realtime. Use when adding or editing anything that emits a notification (a new status transition, an enqueue trigger, fcm-send, notification_templates), when adding a notification `type`, when wiring notification tap→route, when touching the bell badge / notification list / unread count, or when a QC bug says "no push / wrong language / duplicate / opens wrong screen / badge stale". Pairs with [[bow-i18n]] (template localization), [[express-realtime-review]] (badge realtime filter), [[flutter-realtime]] and [[impact-sweep]].
+description: Catch the recurring <PROJECT_KEY> notification bug class BEFORE QC does — the whole push+in-app lifecycle for a status/event, not just one leg of it. A Sprint-7 sweep logged ~20 notification bugs that were each a different leg of the SAME five questions failing: (1) is a push EMITTED on every transition (incl. per-stop legs); (2) in the RECIPIENT's language, not the sender's/app's; (3) exactly ONCE (the app does NOT dedupe by type); (4) does tapping it route to the LIVE target and get WITHDRAWN when that target dies; (5) do the in-app list + bell badge re-sync in realtime. The same five-question lifecycle applies to a web notification centre (admin/partner Next.js) too: a Sprint-8 sweep logged its tap→route leg (clicking a notification did not open the corresponding page) and its read-state persistence (read reverted to unread after refresh/relogin — the read must be written server-side, not held in client state) as the web legs of questions 4 and 5. Use when adding or editing anything that emits a notification (a new status transition, an enqueue trigger, fcm-send, notification_templates), when adding a notification `type`, when wiring notification tap→route (mobile deep-link OR partner/admin web click-through), when touching the bell badge / notification list / unread / read-state count on mobile OR a web notification centre, or when a QC bug says "no push / wrong language / duplicate / opens wrong screen / badge stale / read resets after refresh". Pairs with [[bow-i18n]] (template localization), [[express-realtime-review]] (badge realtime filter), [[flutter-realtime]] and [[impact-sweep]].
 ---
 
 # Notification lifecycle — the five questions every notification must pass
@@ -111,6 +111,11 @@ they must reflect inserts/reads live and count exactly what the server counts.
   query uses (share it); "Mark all read" updates the local count *and* the stream
   reconciles it; the badge derives from the same `countUnread()` source on refresh.
   Subscribe in a service, dispose the channel in the VM ([[flutter-realtime]]).
+- **Web notification centre (admin/partner):** the same two legs fail on the web. The
+  click-through needs the SAME `type`→route table the mobile deep-link uses (§4), keyed
+  off the row `type`/`data`, not a hard-coded list; and "read" must be **persisted
+  server-side** (write the `read_at`/`is_read` column) so it survives a refresh/relogin
+  and the badge re-derives from the server count, exactly as mobile does.
 
 ---
 
