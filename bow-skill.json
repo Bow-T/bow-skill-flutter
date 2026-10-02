@@ -1,51 +1,31 @@
 {
   "$schema": "https://raw.githubusercontent.com/Bow-T/bow-agent/main/schema/bow-skill.schema.json",
-  "id": "flutter-supabase",
-  "label": "Flutter + Supabase",
-  "version": "1.5.0",
-  "description": "Bộ skill ĐẦY ĐỦ cho stack Flutter + Supabase của team Bow — 31 skill thật của dự án (MVVM, realtime, model, migration, security, stripe, jira, testing, verify-runtime, review, finishing-branch, read-path, store-status-lifecycle, web-form…). skillsDir trỏ monorepo/skills; monorepoDir cấp CLAUDE.md + git hooks cho bow-agent khi làm việc trong monorepo. bow-commit nằm ở bộ ghép bow-skill-commit (registry: with [\"commit\"]).",
+  "id": "flutter",
+  "label": "Flutter",
+  "version": "2.0.0",
+  "description": "Bộ skill cho công nghệ Flutter — kiến trúc MVVM, model, i18n của team Bow + skill chính thức của Flutter về layout và test (xem THIRD_PARTY.md). Không gắn với backend nào: ghép với Supabase / REST API tuỳ dự án.",
   "maintainer": "team-flutter",
-  "skillsDir": "monorepo/skills",
-  "monorepoDir": "monorepo",
+  "skillsDir": "skills",
   "targets": {
     "detect": [
-      { "file": "pubspec.yaml", "contains": "flutter" },
-      { "path": "apps/mobile" },
-      { "path": "lib/src/pages" }
-    ],
-    "monorepoHint": "apps/mobile"
+      {
+        "file": "pubspec.yaml",
+        "contains": "sdk: flutter"
+      }
+    ]
+  },
+  "needs": {
+    "flutter-realtime": [
+      "supabase"
+    ]
   },
   "skills": [
     "bow-i18n",
-    "bow-lean",
-    "bow-lean-review",
-    "bow-log-subtask",
     "bow-model",
-    "bow-read-path",
     "bow-ui",
-    "bow-web-form",
-    "code-simplification",
-    "codemagic-build-prod",
-    "debugging-and-error-recovery",
-    "express-realtime-review",
-    "finishing-a-development-branch",
-    "flutter-realtime",
-    "impact-sweep",
-    "jira-triage-bug-qc",
-    "notification-lifecycle",
-    "parity-with-sibling-surface",
-    "planning-and-task-breakdown",
-    "receiving-code-review",
-    "security-and-hardening",
-    "spec-driven-development",
-    "store-status-lifecycle",
-    "stripe-best-practices",
-    "stripe-projects",
-    "supabase-migration",
-    "supabase-security-review",
-    "test-driven-development",
-    "upgrade-stripe",
-    "verify-runtime-not-just-static-green",
-    "watch"
+    "flutter-add-widget-test",
+    "flutter-build-responsive-layout",
+    "flutter-fix-layout-issues",
+    "flutter-realtime"
   ]
 }
