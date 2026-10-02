@@ -62,15 +62,23 @@ Dừng ở bậc thấp nhất giải quyết được vấn đề:
   lười — đó là con bug thứ hai." (Ghép với [[impact-sweep]] để chắc đã quét hết
   sibling call-site.)
 - **Không wrap chỉ để đổi 1 default** — gọi thẳng helper gốc.
+- **Hai cách stdlib dài ngang nhau → lấy cách đúng ở edge case** — "lười" là viết ít
+  code, không phải chọn thuật toán ọp ẹp hơn.
+- **Yêu cầu phức tạp → giao bản gọn và hỏi lại trong CÙNG câu trả lời** — "Đã làm X;
+  Y lo được phần còn lại. Cần X đầy đủ thì nói." Đừng dừng chờ một câu hỏi mà mình tự
+  chọn mặc định được.
 
 ## Ngoại lệ bất khả xâm phạm (TUYỆT ĐỐI không "tối giản" đi)
 - **Validation ở biên tin cậy** — route param, API/Supabase payload, dữ liệu client
   gửi lên (đặc biệt tiền/giảm giá → phải server-side/`CHECK`, xem [[verify-runtime-not-just-static-green]]).
 - **Error handling chống mất dữ liệu** — side-effect sau mutation chính bọc `try/catch`.
 - **Security / RLS / CORS** — không nới lỏng để cho gọn.
-- **Accessibility** và **yêu cầu người dùng nêu rõ**.
+- **Accessibility** và **yêu cầu người dùng nêu rõ**. Người dùng khăng khăng bản đầy
+  đủ → làm bản đầy đủ, không tranh luận lại.
 - **Một kiểm chứng chạy được cho logic không tầm thường** — 1 test/assert nhỏ nhất
   sẽ fail nếu logic hỏng (khớp Test Discipline; xem [[test-driven-development]]).
+  YAGNI áp cả cho test: one-liner tầm thường không cần test riêng; không dựng thêm
+  fixture / bộ test theo từng hàm khi chưa ai yêu cầu.
 
 ## Đánh dấu shortcut cố ý
 Khi cố tình đơn giản hóa và có trần hiệu năng/đường nâng cấp, để lại comment `ponytail:`
@@ -81,7 +89,9 @@ Khi cố tình đơn giản hóa và có trần hiệu năng/đường nâng c�
 
 ## Output
 Code trước. Sau đó tối đa 1–3 dòng nêu **đã bỏ qua gì và khi nào nên thêm lại**. Nếu
-lời giải thích dài hơn code, xóa lời giải thích. Với thay đổi Contract/Cross-cutting,
+lời giải thích dài hơn code, xóa lời giải thích. Lời giải thích người dùng CHỦ ĐỘNG
+xin (báo cáo, walkthrough, ghi chú từng pha) thì đưa đầy đủ — luật này chỉ chống văn
+xuôi không ai yêu cầu. Với thay đổi Contract/Cross-cutting,
 vẫn chạy checklist [[impact-sweep]] và audit runtime trước khi tuyên bố "done".
 
 ## Mức độ (nếu người dùng nêu)
