@@ -2,7 +2,7 @@
   "$schema": "https://raw.githubusercontent.com/Bow-T/bow-agent/main/schema/bow-skill.schema.json",
   "id": "flutter-supabase",
   "label": "Flutter + Supabase",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "Bộ skill ĐẦY ĐỦ cho stack Flutter + Supabase của team Bow — 31 skill thật của dự án (MVVM, realtime, model, migration, security, stripe, jira, testing, verify-runtime, review, finishing-branch, read-path, store-status-lifecycle, web-form…). skillsDir trỏ monorepo/skills; monorepoDir cấp CLAUDE.md + git hooks cho bow-agent khi làm việc trong monorepo. bow-commit nằm ở bộ ghép bow-skill-commit (registry: with [\"commit\"]).",
   "maintainer": "team-flutter",
   "skillsDir": "monorepo/skills",
