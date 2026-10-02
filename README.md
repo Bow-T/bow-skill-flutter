@@ -25,6 +25,20 @@ bow-skill-flutter/
 Các thư mục `agent-skills/` và `prompt/` là **backup đồng bộ** (không nằm trong
 skillsDir nên bow không tự trải — chúng vốn là skill core của bow-agent).
 
+## `bow-commit` nằm ở bộ ghép riêng
+
+Skill `bow-commit` (commit / đặt tên nhánh / cấm trailer AI) không phụ thuộc công nghệ nên đã
+tách sang [bow-skill-commit](https://github.com/Bow-T/bow-skill-commit) để stack nào cũng dùng
+được. Stack này lấy lại nó qua registry của bow-agent:
+
+```json
+{ "id": "flutter-supabase", "…": "…", "with": ["commit"] }
+```
+
+Các skill ở đây vẫn trỏ tới `[[bow-commit]]` — tên skill không đổi. Registry thiếu `with` thì
+dự án Flutter sẽ KHÔNG có `bow-commit`: thêm `with` (và mục `commit` ở `addons`) TRƯỚC khi nâng
+`ref` lên bản đã gỡ skill này.
+
 ## Đã lọc thông tin nội bộ
 
 `monorepo/CLAUDE.md` và vài skill có tên thật/board Jira/account ID đã được thay bằng
